@@ -38,5 +38,9 @@ class GlyphWidget(Widget):
         :param int new_height: request maximum height
         :return: None
         """
+<<<<<<< HEAD
         print(f"new size = {new_width} x {new_height}")
+=======
+        # print(f"new size = {new_width} x {new_height}")
+>>>>>>> Adding GlyphWidget
         self.label.anchored_position = new_width // 2, new_height // 2
