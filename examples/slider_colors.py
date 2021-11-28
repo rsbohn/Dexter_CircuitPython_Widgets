@@ -1,4 +1,3 @@
-# SPDX-FileCopyrightText: 2017 Scott Shawcroft, written for Adafruit Industries
 # SPDX-FileCopyrightText: Copyright (c) 2021 Randall Bohn (dexter)
 #
 # SPDX-License-Identifier: Unlicense
@@ -11,7 +10,7 @@ from adafruit_featherwing import tft_featherwing_35
 from adafruit_bitmap_font import bitmap_font
 from adafruit_display_shapes.rect import Rect
 from adafruit_display_text.label import Label
-from dexter_slider import Slider
+from dexter_widgets.slider import Slider
 
 displayio.release_displays()
 wing = tft_featherwing_35.TFTFeatherWing35()

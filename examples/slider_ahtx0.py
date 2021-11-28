@@ -6,7 +6,7 @@ import board
 import displayio
 from adafruit_ssd1327 import SSD1327
 from adafruit_ahtx0 import AHTx0
-from dexter_slider import Slider
+from dexter_widgets.slider import Slider
 
 """Display temperature and relative humidity.
 

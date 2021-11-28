@@ -1,4 +1,3 @@
-# SPDX-FileCopyrightText: 2017 Scott Shawcroft, written for Adafruit Industries
 # SPDX-FileCopyrightText: Copyright (c) 2021 Randall Bohn (dexter)
 #
 # SPDX-License-Identifier: Unlicense
@@ -12,7 +11,7 @@ import time
 
 import board
 import displayio
-from dexter_slider import Slider
+from dexter_widgets.slider import Slider
 
 # use built in display (FunHouse etc.)
 # see guide for setting up external displays (TFT / OLED breakouts, RGB matrices, etc.)
