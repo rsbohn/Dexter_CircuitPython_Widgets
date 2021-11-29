@@ -138,16 +138,21 @@ class Slider(Widget, Control):
         self.frame_color = 0xFFFFFF
         self.slide_color = slide_color
         self.error_color = 0xCC0000
+        self.slide = None  # see _assemble() below
+        self._assemble(width, height, value)
 
+    def _assemble(self, width, height, value):
+        while len(self) > 0:
+            self.pop()
         self.frame = Rect(0, 0, width, height, outline=self.frame_color)
         self.append(self.frame)
         if width >= height:
             self.slide = HorizontalSlide(
-                width, height, limits=limits, value=value, fill=self.slide_color
+                width, height, limits=self.limits, value=value, fill=self.slide_color
             )
         else:
             self.slide = VerticalSlide(
-                width, height, limits=limits, value=value, fill=self.slide_color
+                width, height, limits=self.limits, value=value, fill=self.slide_color
             )
         self.append(self.slide.rect)
         self.title = Label(
@@ -184,6 +189,13 @@ class Slider(Widget, Control):
         self.insert(1, self.slide.rect)
         self.slide.rect.fill = self.slide_color
         self.title.text = f"{self.name}:{int(self.slide.value)}"
+
+    def resize(self, width, height):
+        """reassemble with a new width and height.
+        Passing self.value because it is actually held in the 'slide' member.
+        And this is replaced every time.
+        """
+        self._assemble(width, height, self.value)
 
     @property
     def value(self):
