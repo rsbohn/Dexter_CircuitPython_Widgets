@@ -12,6 +12,11 @@ from adafruit_featherwing import tft_featherwing_35
 from adafruit_displayio_layout.layouts.grid_layout import GridLayout
 from dexter_widgets.glyph_widget import GlyphWidget
 
+DARK_RED = 0xCC2200
+ORANGE = 0xFF9900
+DARK_GRAY = 0x333333
+GRAY = 0x999999
+
 displayio.release_displays()
 wing = tft_featherwing_35.TFTFeatherWing35()
 display = wing.display
@@ -27,10 +32,19 @@ layout = GridLayout(
 display.show(layout)
 
 single = (1, 1)
-layout.add_content(GlyphWidget("\uF1B0"), (0, 0), single)
+pets = GlyphWidget("\uF1B0")
+pets.color = DARK_GRAY
+pets.background_color = GRAY
+dingir = GlyphWidget("\uF069")
+dingir.color = DARK_RED
+
+layout.add_content(pets, (0, 0), single)
 layout.add_content(GlyphWidget("\uF1EA"), (1, 0), single)
-layout.add_content(GlyphWidget("\uF069"), (2, 0), (1, 2))
+layout.add_content(dingir, (2, 0), (1, 2))
 layout.add_content(GlyphWidget("\uF2CB"), (0, 1), (2, 1))
 
 while True:
-    time.sleep(0.1)
+    time.sleep(0.33)
+    dingir.color = ORANGE
+    time.sleep(0.66)
+    dingir.color = DARK_RED
