@@ -8,7 +8,7 @@ import board
 import displayio
 
 from adafruit_displayio_layout.layouts.grid_layout import GridLayout
-from bubbles import BubblesWidget, september, snow, ice
+from dexter_widgets.bubbles import BubblesWidget, september, snow, ice
 
 if "DISPLAY" in dir(board):
     display = board.DISPLAY
