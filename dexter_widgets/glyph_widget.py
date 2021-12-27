@@ -8,6 +8,7 @@ You can get ForkAwesome-42.pcf
 from https://emergent.unpythonic.net/01606790241
 """
 
+import displayio
 from adafruit_bitmap_font.bitmap_font import load_font
 from adafruit_displayio_layout.widgets.widget import Widget
 from adafruit_display_text.label import Label
@@ -23,11 +24,18 @@ class GlyphWidget(Widget):
     """Provides a ForkAwesome glyph as a Widget."""
 
     def __init__(self, glyph: str, **kwargs):
+        self._background_color = None
         super().__init__(**kwargs)
         self.label = Label(FONT, text=glyph)
         self.label.anchor_point = 0.5, 0.5
         self.label.anchored_position = 21, 21
         self.append(self.label)
+        self._background_palette = displayio.Palette(1)
+
+    def _empty(self):
+        """remove all items from this widget"""
+        while len(self) > 0:
+            self.pop()
 
     def resize(self, new_width: int, new_height: int) -> None:
         """Resize the widget to a new width and height.
@@ -39,3 +47,32 @@ class GlyphWidget(Widget):
         :return: None
         """
         self.label.anchored_position = new_width // 2, new_height // 2
+        if self.background_color:
+            self._background_palette[0] = self._background_color
+            self._empty()
+            background_bitmap = displayio.Bitmap(new_width, new_height, 1)
+            self.append(
+                displayio.TileGrid(
+                    background_bitmap, pixel_shader=self._background_palette
+                )
+            )
+            self.append(self.label)
+
+    @property
+    def color(self):
+        """returns foreground color"""
+        return self.label.color
+
+    @color.setter
+    def color(self, new_color):
+        self.label.color = new_color
+
+    @property
+    def background_color(self):
+        """returns the background color"""
+        return self._background_palette[0]
+
+    @background_color.setter
+    def background_color(self, new_color):
+        self._background_color = new_color
+        self._background_palette[0] = new_color
