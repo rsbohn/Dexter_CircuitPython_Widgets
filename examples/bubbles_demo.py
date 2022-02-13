@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: Unlicense
 
 # Run me on the 3.5" TFT FeatherWing
-import time
 import board
 import displayio
 
@@ -40,7 +39,6 @@ layout.add_content(ice_bubbles, (2, 0), single)
 # from adafruit_bitmapsaver import save_pixels
 # save_pixels("/sd/awesome.bmp", display)
 while True:
-    # time.sleep(0.01)
     september_bubbles.animate()
     snow_bubbles.animate()
     ice_bubbles.animate()
