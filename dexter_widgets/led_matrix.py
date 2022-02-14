@@ -31,7 +31,9 @@ class LedMatrix(widget.Widget):
     def resize(self, new_width: int, new_height: int):
         """Resize widget to fit as needed"""
         self.remove(self._background)
-        self._background = Rect(0, 0, new_width, new_height, self._background_color)
+        self._background = Rect(
+            0, 0, new_width, new_height, fill=self._background_color
+        )
         self.append(self._background)
         if self.grid is None:
             self.grid = LedGrid4x4()
